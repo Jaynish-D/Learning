@@ -19,7 +19,7 @@ namespace Learning
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Learning", Version = "v1" });
             });
 
             // Cors Policy
