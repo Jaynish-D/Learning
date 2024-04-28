@@ -1,4 +1,8 @@
 ﻿using Learning.Data;
+using Learning.Models.Mapper;
+using Learning.Repository.Uow;
+using Learning.Repository.UserRepo;
+using Learning.Utility.PasswordHashServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +40,13 @@ namespace Learning
 
             services.AddDbContext<ApplicationDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddSingleton<IPasswordHashService, PasswordHashService>();
+
+            services.AddAutoMapper(typeof(MapperProfile));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
